@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: kammel-kalima
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 app:app
+    healthCheckPath: /health
+    envVars:
+      - key: GAME_ADMIN_KEY
+        generateValue: true
